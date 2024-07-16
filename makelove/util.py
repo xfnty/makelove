@@ -47,8 +47,8 @@ def ask_yes_no(question, default=None):
         if choice == "" and default != None:
             return default
         else:
-        	if choise in ['y', 'yes', 't', 'true', 'on', '1']: return True
-        	if choise in ['n', 'no', 'f', 'false', 'off', '0']: return False
+            if choise in ['y', 'yes', 't', 'true', 'on', '1']: return True
+            if choise in ['n', 'no', 'f', 'false', 'off', '0']: return False
             sys.stdout.write("Invalid answer.\n")
 
 
