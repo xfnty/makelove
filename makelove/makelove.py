@@ -8,7 +8,6 @@ import subprocess
 from email.utils import formatdate
 import zipfile
 import re
-import pkg_resources
 
 from .config import get_config, all_targets, init_config_assistant
 from .hooks import execute_hook
@@ -20,6 +19,16 @@ from .macos import build_macos
 from .lovejs import build_lovejs
 
 all_hooks = ["prebuild", "postbuild"]
+
+
+def _get_makelove_version():
+	if sys.version_info[:2] >= [3, 8]:
+		import importlib.metadata
+		return importlib.metadata.version('makelove')
+	else:
+		import pkg_resources
+		return pkg_resources.get_distribution('makelove').version
+
 
 # Sadly argparse cannot handle nargs="*" and choices and will error if not at least one argument is provided
 def _choices(values):
@@ -255,7 +264,7 @@ def main():
     args = parser.parse_args()
 
     if args.display_version:
-        print("makelove {}".format(pkg_resources.get_distribution("makelove").version))
+        print("makelove {}".format(_get_makelove_version()))
         sys.exit(0)
 
     if not os.path.isfile("main.lua"):
