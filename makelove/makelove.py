@@ -22,7 +22,7 @@ all_hooks = ["prebuild", "postbuild"]
 
 
 def _get_makelove_version():
-	if sys.version_info[:2] >= [3, 8]:
+	if sys.version_info[:2] >= (3, 8):
 		import importlib.metadata
 		return importlib.metadata.version('makelove')
 	else:
